@@ -1,0 +1,19 @@
+{
+    "name": "spotawheel/vumo-api-client",
+    "description": "API client for Vumography VUMO AI",
+    "version": "1.0",
+    "autoload": {
+        "psr-4": {
+            "Spotawheel\\VumoApiClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jacob Lapinski",
+            "email": "jakubjanlapinski@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/http": "^10.37"
+    }
+}
