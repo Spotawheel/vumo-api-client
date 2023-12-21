@@ -105,7 +105,5 @@ class Vumo extends Factory
         
         return $this;
     }
-    
-    // https://static.spotawheel.ro/vf101/classifieds/1572/volkswagen-polo-2017-exterior-11616-front-left-0_m.jpg
 
 }
