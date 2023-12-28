@@ -11,21 +11,21 @@ trait ProcessEndpoint
     public function processSingleImage(string $configurationName, string $imageContents, bool $throtling = false): Response
     {
         return $this->withBody($imageContents)
-            ->withQueryParams(['throtling' => $throtling])
+            ->withQueryParameters(['throtling' => $throtling])
             ->post(self::PROCESS_ENDPOINT . "/single/{$configurationName}");
     }
 
     public function processSingleImageWithDetails(string $configurationName, string $imageContents, bool $throtling = false): Response
     {
         return $this->withBody($imageContents)
-            ->withQueryParams(['throtling' => $throtling])
+            ->withQueryParameters(['throtling' => $throtling])
             ->post(self::PROCESS_ENDPOINT . "/single/{$configurationName}");
     }
 
     public function processSingleImageAsync(string $configurationName, string $imageContents, string $urlToResponse, bool $throtling = false): Response
     {
         return $this->withBody($imageContents)
-            ->withQueryParams([
+            ->withQueryParameters([
                 'throttling' => $throtling,
                 'urlToResponse' => $urlToResponse,
             ])
@@ -40,7 +40,7 @@ trait ProcessEndpoint
         bool $throtling = false
     ): Response
     {
-        return $this->withQueryParams(['throtling' => $throtling])
+        return $this->withQueryParameters(['throtling' => $throtling])
             ->post(self::PROCESS_ENDPOINT . "/single/url/{$configurationName}/async/details", [
                 'endpoint' => [
                     'headers' => $headers,

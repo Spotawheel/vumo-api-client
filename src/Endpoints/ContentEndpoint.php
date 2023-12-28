@@ -15,8 +15,7 @@ trait ContentEndpoint
 
     public function createOrUpdateContent(string $contentName, string $contentType, string $imageContents): Response
     {
-        return $this->withBody($imageContents)
-            ->post(self::CONTENT_ENDPOINT . "/upload/{$contentName}/{$contentType}");
+        return $this->withBody($imageContents)->post(self::CONTENT_ENDPOINT . "/upload/{$contentName}/{$contentType}");
     }
 
     public function deleteContent(string $contentName): Response
