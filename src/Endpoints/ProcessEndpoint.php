@@ -11,8 +11,8 @@ trait ProcessEndpoint
     public function processSingleImage(
         string $configurationName, 
         string $imageContents, 
+        string $extention = 'jpeg',
         bool $throtling = false, 
-        string $extention = 'jpeg'
     ): Response
     {
         return $this->withBody($imageContents, "image/{$extention}")
@@ -23,21 +23,21 @@ trait ProcessEndpoint
     public function processSingleImageWithDetails(
         string $configurationName, 
         string $imageContents, 
+        string $extention = 'jpeg',
         bool $throtling = false, 
-        string $extention = 'jpeg'
     ): Response
     {
         return $this->withBody($imageContents, "image/{$extention}")
             ->withQueryParameters(['throtling' => $throtling])
-            ->post(self::PROCESS_ENDPOINT . "/single/{$configurationName}");
+            ->post(self::PROCESS_ENDPOINT . "/single/{$configurationName}/details");
     }
 
     public function processSingleImageAsync(
         string $configurationName, 
-        string $imageContents, 
         string $urlToResponse, 
+        string $imageContents, 
+        string $extention = 'jpeg',
         bool $throtling = false, 
-        string $extention = 'jpeg'
     ): Response
     {
         return $this->withBody($imageContents, "image/{$extention}")
@@ -50,10 +50,10 @@ trait ProcessEndpoint
 
     public function processSingleUrlWithDetailsAsync(
         string $configurationName,
-        string $imageUrl, 
         string $urlToResponse, 
+        string $imageUrl, 
         array $headers = [], 
-        bool $throtling = false
+        bool $throtling = false,
     ): Response
     {
         return $this->withQueryParameters(['throtling' => $throtling])
@@ -79,8 +79,8 @@ trait ProcessEndpoint
 
     public function processMultipleUrlsWithDetailsAsync(
         string $configurationName, 
-        array $imageUrls, 
         string $urlToResponse, 
+        array $imageUrls, 
         array $headers = []
     ): Response
     {

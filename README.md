@@ -49,7 +49,7 @@ If the access token expires the `authorize` method can be called to re-authorize
 $vumo->authorize();
 ```
 
-## Responses
+## Handling Responses
 
 Uderneath this package is a wrapper for [illuminate/http](https://github.com/illuminate/http/tree/master)'s client. This package provides a lot of helpfull methods to deal with http responses. Documentation can be found [here](https://laravel.com/docs/10.x/http-client).
 
@@ -74,18 +74,74 @@ Every vumography endpoint has be mapped to its corresponding method. For more in
 
 ```php
 // Get all content
-$vumo->getContent();
+$response = $vumo->getContent();
 
 // Get a specific content by its name
-$vumo->getContent('content-name');
+$$response = vumo->getContent('content-name');
 
-// Create new content
-$image = file_get_contents('image.jpg');
-$vumo->createOrUpdateContent('content-name', 'BACKGROUND_SINGLE', $image);
+// Create or update content (the default extention parameter is jpeg)
+$image = file_get_contents('image.png');
+$response = $vumo->createOrUpdateContent('content-name', 'BACKGROUND_SINGLE', $image, 'png');
 
 // Delete content
-$vumo->deleteContent('content-name');
+$response = $vumo->deleteContent('content-name');
 ```
 
 ### Configuration
 
+On information on how to build configurations please consult the official documentation.
+
+```php
+// Get all configurations
+$response = $vumo->getConfiguration();
+
+// Get a specific configuration
+$response = $vumo->getConfiguration('configuration-name');
+
+// Create or update a configuration
+$response = $vumo->createOrUpdateConfiguration('configuration-name', $processors_array, 'EXTERIOR');
+
+// Update configurations additional info
+$response = $vumo->updateConfigurationInfo('configuration-name', $info_array);
+
+// Delete configuration
+$response = $vumo->deleteConfiguration('configuration-name');
+
+```
+
+### Processing images
+
+```php
+$image = file_get_contents('file.jpeg');
+$throtling = true;
+
+// Process single image by suplying image contents as a string
+$response = $vumo->processSingleImage('configuration-name', $image);
+
+// Extention and throtling can also be specified
+$response = $vumo->processSingleImage('configuration-name', $image, 'jpeg', $throtling);
+
+// Same as before but returns a more detailed response
+$response = $vumo->processSingleImageWithDetails('configuration-name', $image, 'jpeg', $throtling);
+
+// Process a single image asynchronously with specifying a webhook url
+$response = $vumo->processSingleImageAsync('configuration-name', 'https://response_url_here.test', $image, 'jpeg', $throtling);
+
+// Process a single image asynchronously by supplying the image url
+$response = $vumo->processSingleUrlWithDetailsAsync('configuration-name', 'https://response_url_here.test', 'https://myimage.jpg', $headers, $throtling);
+
+// Process multiple images
+$response = $vumo->processMultipleImagesWithDetails('cofiguration-name', $images_array);
+
+// Process multiple images URLs
+$response = $vumo->processMultipleUrlsWithDetails('cofiguration-name', $urls_array);
+
+// Process multiple images asynchronously
+$response = $vumo->processMultipleUrlsWithDetailsAsync('cofiguration-name', 'https://response_url_here.test', $urls_array, $headers);
+
+```
+
+Throtling and extention are optional parameters that can be omitted. Their default values are:
+`$extension = 'jpeg'`
+</br>
+`$throtling = false`
