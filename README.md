@@ -41,9 +41,17 @@ $vumo = new \Spotawheel\VumoApiClient\Vumo($username, $password, $refreshToken);
 
 By default the client will try to use the refresh token to authorize the client. If the refresh token expires then the auth credentials will be used. If both fail a VumoException will be thrown.
 
+#### Re-authorize client
+
+If the access token expires the `authorize` method can be called to re-authorize it.
+
+```php
+$vumo->authorize();
+```
+
 ## Responses
 
-Uderneath this package is a wrapper for [illuminate/http](https://github.com/illuminate/http/tree/master). This package provides a lot of helpfull methods to deal with http responses. Documentation can be found [here](https://laravel.com/docs/10.x/http-client).
+Uderneath this package is a wrapper for [illuminate/http](https://github.com/illuminate/http/tree/master)'s client. This package provides a lot of helpfull methods to deal with http responses. Documentation can be found [here](https://laravel.com/docs/10.x/http-client).
 
 ### Example of handling responses
 
@@ -57,4 +65,27 @@ if ($response->ok()) {
     $data = $response->json();
 }
 ```
+
+## Available methods
+
+Every vumography endpoint has be mapped to its corresponding method. For more information on what data these endpoint expect consult the documentation.
+
+### Content
+
+```php
+// Get all content
+$vumo->getContent();
+
+// Get a specific content by its name
+$vumo->getContent('content-name');
+
+// Create new content
+$image = file_get_contents('image.jpg');
+$vumo->createOrUpdateContent('content-name', 'BACKGROUND_SINGLE', $image);
+
+// Delete content
+$vumo->deleteContent('content-name');
+```
+
+### Configuration
 

@@ -13,9 +13,14 @@ trait ContentEndpoint
         return $this->get(self::CONTENT_ENDPOINT . "/{$contentName}");
     }
 
-    public function createOrUpdateContent(string $contentName, string $contentType, string $imageContents): Response
+    public function createOrUpdateContent(
+        string $contentName, 
+        string $contentType, 
+        string $imageContents, 
+        string $extention = 'jpeg'
+    ): Response
     {
-        return $this->withBody($imageContents)->post(self::CONTENT_ENDPOINT . "/upload/{$contentName}/{$contentType}");
+        return $this->withBody($imageContents, "image/{$extention}")->post(self::CONTENT_ENDPOINT . "/upload/{$contentName}/{$contentType}");
     }
 
     public function deleteContent(string $contentName): Response
