@@ -43,7 +43,7 @@ By default the client will try to use the refresh token to authorize the client.
 
 #### Re-authorize client
 
-If the access token expires the `authorize` method can be called to re-authorize it.
+If the access token expires the `authorize` method can be called to re-authorize the client. According to the docs access tokens expire after a day.
 
 ```php
 $vumo->authorize();

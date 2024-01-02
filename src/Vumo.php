@@ -25,13 +25,13 @@ class Vumo extends Factory
 
     public function __construct(string $username, string $password, string $refreshToken = '', string $system = 'autography') 
     {
+        parent::__construct();
+
         $this->username = $username;
         $this->password = $password;
         $this->system = $system;
         $this->refreshToken = $refreshToken;
         $this->accessToken = '';
-
-        $this->authorize();
     }
 
     protected function newPendingRequest(): PendingRequest

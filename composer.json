@@ -14,6 +14,10 @@
         }
     ],
     "require": {
-        "illuminate/http": "^10.37"
+        "illuminate/http": "^10.37",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
     }
 }
