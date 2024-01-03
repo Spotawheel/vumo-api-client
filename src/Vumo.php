@@ -23,7 +23,7 @@ class Vumo extends Factory
     protected string $password;
     protected string $system;
 
-    public function __construct(string $username, string $password, string $refreshToken = '', string $system = 'autography') 
+    public function __construct(string $username = '', string $password = '', string $refreshToken = '', string $system = 'autography') 
     {
         parent::__construct();
 
@@ -60,7 +60,7 @@ class Vumo extends Factory
         return $this;
     }
 
-    private function logIn(): void
+    public function logIn(): Vumo
     {
         $response = $this->post(self::AUTH_URL . "/login", [
             'username' => $this->username,
@@ -76,10 +76,11 @@ class Vumo extends Factory
 
         $this->accessToken = $data['access_token'];
         $this->refreshToken = $data['refresh_token'];
-    
+
+        return $this;    
     }
 
-    private function refreshAccessToken(): void
+    public function refreshAccessToken(): Vumo
     {
         $response = $this->post(self::AUTH_URL . "/refresh", [
             'refresh_token' => $this->refreshToken,
@@ -92,6 +93,8 @@ class Vumo extends Factory
         }
 
         $this->accessToken = $data['access_token'];
+
+        return $this;
     }
 
     public function getRefreshToken(): string 

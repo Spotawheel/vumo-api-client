@@ -19,11 +19,14 @@ Vumo uses access tokens to authorize its API calls. It also generates a refresh 
 ```php
 // Initialize the client
 $vumo = new \Spotawheel\VumoApiClient\Vumo($username, $password);
+
+// Authorize the client
+$vumo->authorize();
 ```
 
 #### Authorization error
 
-If the authorization fails a `\Spotawheel\VumoApiClient\Exceptions\VumoAuthException` will be thrown.
+The `authorize` function will try to get the access token by using the refresh token. If you have not specified a refresh token or it has expired then it will try to log in using the supplied credentials. If both refreshing and login fail then a `\Spotawheel\VumoApiClient\Exceptions\VumoAuthException` will be thrown.
 
 #### Successful authorization
 
@@ -32,14 +35,23 @@ After a successful authorization a refresh token will be returned. This token ca
 ```php
 $refreshToken = $vumo->getRefreshToken();
 ```
-This refresh token can be then supplied to the constructor to authorize the client.
+Refresh token's can be then supplied to the constructor to authorize the client.
 
  ```php
-// Initialize the client
 $vumo = new \Spotawheel\VumoApiClient\Vumo($username, $password, $refreshToken);
+
+$vumo->authorize();
 ```
 
-By default the client will try to use the refresh token to authorize the client. If the refresh token expires then the auth credentials will be used. If both fail a VumoException will be thrown.
+The client can also be initialized with only the refresh token.
+
+```php
+$vumo = new \Spotawheel\VumoApiClient\Vumo(refreshToken: 'FAKE_JWT_REFRESH_TOKEN');
+
+$vumo->authorize();
+```
+
+Be aware that the log in will fail when the refresh token expires.
 
 #### Re-authorize client
 
@@ -51,7 +63,7 @@ $vumo->authorize();
 
 ## Handling Responses
 
-Uderneath this package is a wrapper for [illuminate/http](https://github.com/illuminate/http/tree/master)'s client. This package provides a lot of helpfull methods to deal with http responses. Documentation can be found [here](https://laravel.com/docs/10.x/http-client).
+This client is a wrapper for [illuminate/http](https://github.com/illuminate/http/tree/master)'s client. This package provides a lot of helpfull methods to deal with http responses. Documentation can be found [here](https://laravel.com/docs/10.x/http-client).
 
 ### Example of handling responses
 
