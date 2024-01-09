@@ -1,10 +1,29 @@
 # Vumography API client
 
-Http client for [Vumography](https://vumo.ai/vumography/)
+Http client for [Vumography](https://vumo.ai/vumography/). This package uses Laravel's Http client but can be used in any PHP project.
 
 ## Requirements
 
 This package requires PHP 8.2
+
+## Instalation
+
+The following must be added to the repositories array in the composer.json of your project.
+
+```json
+"repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/Spotawheel/vumo-api-client.git"
+    }
+]
+```
+
+Then simply run
+
+```
+composer require spotawheel/vumo-api-client
+```
 
 ## Usage
 
