@@ -6,7 +6,7 @@ Http client for [Vumography](https://vumo.ai/vumography/). This package uses Lar
 
 This package requires PHP 8.2
 
-## Instalation
+## Installation
 
 The following must be added to the repositories array in the composer.json of your project.
 
@@ -108,7 +108,7 @@ Every vumography endpoint has be mapped to its corresponding method. For more in
 $response = $vumo->getContent();
 
 // Get a specific content by its name
-$$response = vumo->getContent('content-name');
+$response = vumo->getContent('content-name');
 
 // Create or update content (the default extention parameter is jpeg)
 $image = file_get_contents('image.png');
