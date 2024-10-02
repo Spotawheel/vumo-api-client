@@ -1,7 +1,7 @@
 {
     "name": "spotawheel/vumo-api-client",
     "description": "API client for Vumography VUMO AI",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "autoload": {
         "psr-4": {
             "Spotawheel\\VumoApiClient\\": "src/"
@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "illuminate/http": "^9.0|^10.0",
+        "illuminate/http": "^9.0|^10.0|^11.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
